@@ -3,13 +3,8 @@
 // 从后台管理系统读取数据，admin修改后自动更新
 // ==========================================
 
-// Get data — always prefer SITE_DATA (GitHub synced), localStorage as fallback
+// 直接使用 data.js 数据（GitHub同步），保证前后台一致
 function getData() {
-  // 优先读admin后台保存的修改，其次用data.js默认数据
-  var saved = localStorage.getItem('wanhong_data');
-  if (saved) {
-    try { return JSON.parse(saved); } catch(e) {}
-  }
   return JSON.parse(JSON.stringify(SITE_DATA));
 }
 
