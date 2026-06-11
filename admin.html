@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>后台管理 — 万泓科技</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy: #0A1628; --ink: #12203A; --gold: #B88C3C; --white: #fff;
+  --lgray: #f5f6f8; --mgray: #888; --dgray: #333;
+  --blue: #1A5FAA; --green: #27AE60; --red: #E74C3C; --orange: #E67E22;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background:#f0f2f5; display:flex; min-height:100vh; }
+
+/* SIDEBAR */
+.sidebar { width:240px; background:var(--navy); color:var(--white); display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:100; }
+.sidebar-header { padding:24px 20px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.sidebar-header h2 { font-size:18px; color:var(--gold); }
+.sidebar-header small { font-size:11px; color:rgba(255,255,255,0.5); }
+.sidebar-nav { flex:1; padding:12px 0; }
+.sidebar-nav a { display:flex; align-items:center; gap:10px; padding:12px 20px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px; transition:all 0.2s; }
+.sidebar-nav a:hover, .sidebar-nav a.active { background:rgba(255,255,255,0.08); color:var(--gold); }
+.sidebar-nav a .icon { font-size:18px; width:24px; text-align:center; }
+.sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; }
+.sidebar-footer a { color:var(--gold); text-decoration:none; }
+
+/* MAIN */
+.main { margin-left:240px; flex:1; padding:24px; }
+.page { display:none; }
+.page.active { display:block; }
+.page-header { margin-bottom:24px; }
+.page-header h1 { font-size:24px; color:var(--navy); }
+.page-header p { color:var(--mgray); font-size:13px; margin-top:4px; }
+
+/* CARDS */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+.stat-card { background:var(--white); padding:20px 24px; border-radius:10px; box-shadow:var(--shadow); }
+.stat-card .stat-num { font-size:28px; font-weight:700; color:var(--navy); }
+.stat-card .stat-label { font-size:12px; color:var(--mgray); margin-top:4px; }
+
+/* TABLE */
+.panel { background:var(--white); border-radius:10px; box-shadow:var(--shadow); padding:24px; margin-bottom:20px; }
+.panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.panel-header h3 { font-size:16px; color:var(--navy); }
+
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:var(--lgray); padding:10px 12px; text-align:left; font-weight:600; color:var(--dgray); border-bottom:2px solid #e0e0e0; }
+td { padding:10px 12px; border-bottom:1px solid #eee; }
+tr:hover td { background:#fafbfc; }
+
+.btn { display:inline-block; padding:8px 16px; border-radius:6px; border:none; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; text-decoration:none; }
+.btn-sm { padding:5px 10px; font-size:11px; }
+.btn-primary { background:var(--blue); color:white; }
+.btn-primary:hover { background:var(--navy); }
+.btn-success { background:var(--green); color:white; }
+.btn-warning { background:var(--orange); color:white; }
+.btn-danger { background:var(--red); color:white; }
+.btn-outline { background:white; border:1px solid #ddd; color:var(--dgray); }
+.btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+.btn-gold { background:var(--gold); color:white; }
+.btn-gold:hover { opacity:0.9; }
+.mr-2 { margin-right:8px; }
+
+/* FORM */
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:13px; font-weight:600; color:var(--dgray); margin-bottom:6px; }
+.form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 12px; border:1.5px solid #ddd; border-radius:6px; font-size:13px; transition:border 0.2s; font-family:inherit; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--blue); }
+.form-group textarea { min-height:80px; resize:vertical; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:200; justify-content:center; align-items:center; }
+.modal-overlay.show { display:flex; }
+.modal { background:white; border-radius:12px; padding:32px; width:90%; max-width:700px; max-height:80vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+.modal h2 { font-size:20px; color:var(--navy); margin-bottom:20px; }
+.modal-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:24px; }
+
+/* BADGE */
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+.badge-success { background:#e8f8ef; color:var(--green); }
+.badge-warning { background:#fef5e7; color:var(--orange); }
+.badge-info { background:#e8f0fa; color:var(--blue); }
+
+/* TOAST */
+.toast { position:fixed; top:20px; right:20px; padding:14px 24px; border-radius:8px; color:white; font-size:14px; z-index:300; opacity:0; transform:translateY(-20px); transition:all 0.3s; }
+.toast.show { opacity:1; transform:translateY(0); }
+.toast-success { background:var(--green); }
+.toast-error { background:var(--red); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  .sidebar { width:60px; }
+  .sidebar-header h2, .sidebar-header small, .sidebar-nav a span:not(.icon), .sidebar-footer { display:none; }
+  .main { margin-left:60px; }
+  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .form-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>⚡ 万泓后台</h2>
+    <small>网站管理系统</small>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#dashboard" class="active" data-page="dashboard">
+      <span class="icon">📊</span> <span>仪表盘</span>
+    </a>
+    <a href="#products" data-page="products">
+      <span class="icon">🔋</span> <span>产品管理</span>
+    </a>
+    <a href="#company" data-page="company">
+      <span class="icon">🏭</span> <span>公司信息</span>
+    </a>
+    <a href="#contact" data-page="contact">
+      <span class="icon">📞</span> <span>联系方式</span>
+    </a>
+    <a href="#settings" data-page="settings">
+      <span class="icon">⚙️</span> <span>数据备份</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="../wanhong_admin/index.html" target="_blank">🌐 查看网站 →</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- DASHBOARD -->
+  <section id="page-dashboard" class="page active">
+    <div class="page-header"><h1>📊 仪表盘</h1><p>网站数据概览</p></div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="stat-products">13</div><div class="stat-label">产品数量</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-categories">3</div><div class="stat-label">产品分类</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-stock">13</div><div class="stat-label">有货产品</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-lastupdate">刚刚</div><div class="stat-label">最后更新</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>快捷操作</h3></div>
+      <a href="#" class="btn btn-primary mr-2" onclick="switchPage('products');addProduct();">+ 新增产品</a>
+      <a href="#" class="btn btn-outline mr-2" onclick="switchPage('company');">编辑公司信息</a>
+      <a href="#" class="btn btn-outline mr-2" onclick="switchPage('settings');">导出数据备份</a>
+      <a href="../wanhong_admin/index.html" target="_blank" class="btn btn-gold">打开前台网站</a>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>最近产品</h3></div>
+      <table><thead><tr><th>产品名称</th><th>型号</th><th>分类</th><th>库存状态</th></tr></thead>
+      <tbody id="dashboard-products"></tbody></table>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="page-products" class="page">
+    <div class="page-header">
+      <h1>🔋 产品管理</h1>
+      <p>添加、编辑、删除产品。修改后前台网站自动更新。</p>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>产品列表 (<span id="product-count">13</span>)</h3>
+        <button class="btn btn-primary" onclick="addProduct()">+ 新增产品</button>
+      </div>
+      <table><thead><tr><th>图片</th><th>产品名称</th><th>型号</th><th>容量</th><th>分类</th><th>库存</th><th>操作</th></tr></thead>
+      <tbody id="products-table"></tbody></table>
+    </div>
+  </section>
+
+  <!-- COMPANY -->
+  <section id="page-company" class="page">
+    <div class="page-header"><h1>🏭 公司信息</h1><p>修改公司名称、简介、数据统计等</p></div>
+    <div class="panel">
+      <form id="company-form">
+        <div class="form-group"><label>公司中文名称</label><input type="text" id="comp-name" required></div>
+        <div class="form-group"><label>公司英文名称</label><input type="text" id="comp-nameEn"></div>
+        <div class="form-group"><label>中文标语</label><input type="text" id="comp-slogan"></div>
+        <div class="form-group"><label>公司简介</label><textarea id="comp-about" rows="3"></textarea></div>
+        <h4 style="margin:16px 0 12px;color:var(--navy)">数据统计（首页展示的4个数字）</h4>
+        <div class="form-row">
+          <div class="form-group"><label>统计1-数字</label><input type="text" id="stat1-num"></div>
+          <div class="form-group"><label>统计1-描述</label><input type="text" id="stat1-label"></div>
+          <div class="form-group"><label>统计2-数字</label><input type="text" id="stat2-num"></div>
+          <div class="form-group"><label>统计2-描述</label><input type="text" id="stat2-label"></div>
+          <div class="form-group"><label>统计3-数字</label><input type="text" id="stat3-num"></div>
+          <div class="form-group"><label>统计3-描述</label><input type="text" id="stat3-label"></div>
+          <div class="form-group"><label>统计4-数字</label><input type="text" id="stat4-num"></div>
+          <div class="form-group"><label>统计4-描述</label><input type="text" id="stat4-label"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:12px;">保存公司信息</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="page-contact" class="page">
+    <div class="page-header"><h1>📞 联系方式</h1><p>修改地址、电话、邮箱等联系信息</p></div>
+    <div class="panel">
+      <form id="contact-form">
+        <div class="form-group"><label>公司地址</label><input type="text" id="ctc-address" required></div>
+        <div class="form-row">
+          <div class="form-group"><label>联系人</label><input type="text" id="ctc-person"></div>
+          <div class="form-group"><label>电话1</label><input type="text" id="ctc-phone1"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>电话2 联系人</label><input type="text" id="ctc-phone2Label"></div>
+          <div class="form-group"><label>电话2 号码</label><input type="text" id="ctc-phone2"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>邮箱</label><input type="text" id="ctc-email"></div>
+          <div class="form-group"><label>微信</label><input type="text" id="ctc-wechat"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:12px;">保存联系方式</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="page-settings" class="page">
+    <div class="page-header"><h1>⚙️ 数据备份</h1><p>导出和导入网站数据</p></div>
+    <div class="panel">
+      <h3 style="margin-bottom:12px;">📥 导出数据</h3>
+      <p style="color:var(--mgray);margin-bottom:16px;">将所有产品、公司信息、联系方式导出为JSON文件，用于备份或迁移。</p>
+      <button class="btn btn-gold" onclick="exportData()">📥 下载数据备份 (JSON)</button>
+    </div>
+    <div class="panel">
+      <h3 style="margin-bottom:12px;">📤 导入数据</h3>
+      <p style="color:var(--mgray);margin-bottom:16px;">从之前导出的JSON备份文件中恢复数据。<strong style="color:var(--red)">注意：会覆盖当前所有数据！</strong></p>
+      <input type="file" id="import-file" accept=".json" style="margin-bottom:8px;">
+      <button class="btn btn-warning" onclick="importData()">📤 导入数据</button>
+    </div>
+    <div class="panel">
+      <h3 style="margin-bottom:12px;">🔄 恢复默认</h3>
+      <p style="color:var(--mgray);margin-bottom:16px;">清除所有修改，恢复为初始数据。<strong style="color:var(--red)">此操作不可撤销！</strong></p>
+      <button class="btn btn-danger" onclick="resetData()">🔄 恢复默认数据</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal">
+    <h2 id="modal-title">新增产品</h2>
+    <form id="product-form">
+      <input type="hidden" id="prod-id">
+      <div class="form-row">
+        <div class="form-group"><label>产品名称 *</label><input type="text" id="prod-name" required></div>
+        <div class="form-group"><label>产品型号 *</label><input type="text" id="prod-model" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>容量</label><input type="text" id="prod-capacity"></div>
+        <div class="form-group"><label>电压</label><input type="text" id="prod-voltage"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>尺寸</label><input type="text" id="prod-size"></div>
+        <div class="form-group"><label>适用机型</label><input type="text" id="prod-usage"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>电芯类型</label><input type="text" id="prod-type"></div>
+        <div class="form-group"><label>分类 *</label><select id="prod-category"><option value="cylindrical">圆柱型电芯</option><option value="cbd">CBD方形电池</option><option value="custom">定制电池</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>产品图片路径</label><input type="text" id="prod-image" value="images/product_01.png"></div>
+        <div class="form-group"><label>库存状态</label><select id="prod-stock"><option value="true">有货</option><option value="false">缺货</option></select></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeModal()">取消</button>
+        <button type="submit" class="btn btn-primary" id="modal-save-btn">保存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
