@@ -48,7 +48,7 @@ const SITE_DATA = {
       "usage": "waka / 妈宝 / 冰爆 / 小黑条 / 雾专用",
       "type": "估价三元A品",
       "category": "cylindrical",
-      "image": "images/product_01.png",
+      "image": "images/73f0314eb5175a0d131095acdbb239de.jpg",
       "stock": true
     },
     {
@@ -61,7 +61,7 @@ const SITE_DATA = {
       "usage": "一次性通用款",
       "type": "猛系A品",
       "category": "cylindrical",
-      "image": "images/product_02.png",
+      "image": "images/b826a614ad9ca033d5f8e7f8068c22ce.jpg",
       "stock": true
     },
     {
@@ -74,7 +74,7 @@ const SITE_DATA = {
       "usage": "一次性通用",
       "type": "猛系A品",
       "category": "cbd",
-      "image": "images/product_03.png",
+      "image": "images/ba036c4e30aa92a16ad2d73f892d8bdd.jpg",
       "stock": true
     },
     {
@@ -87,7 +87,7 @@ const SITE_DATA = {
       "usage": "小型专用",
       "type": "猛系A品/纯钴",
       "category": "cylindrical",
-      "image": "images/product_04.png",
+      "image": "images/c8c269d7b6db2ed52ceae9510addb4f8.jpg",
       "stock": true
     },
     {
@@ -100,7 +100,7 @@ const SITE_DATA = {
       "usage": "调冰",
       "type": "估价三元A品",
       "category": "cylindrical",
-      "image": "images/product_05.png",
+      "image": "images/e89c31749223c18bd73f2da563c12e60.jpg",
       "stock": true
     },
     {
