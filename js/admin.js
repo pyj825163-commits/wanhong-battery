@@ -235,6 +235,21 @@ function saveData() {
   localStorage.setItem('wanhong_data_version', Date.now().toString());
 }
 
+// ===== PUBLISH TO GITHUB =====
+function publishToGithub() {
+  // Generate complete data.js file content
+  const dataJS = `// ==========================================\n// 万泓科技网站数据 — Auto-generated ${new Date().toISOString().slice(0,10)}\n// ==========================================\n\nconst SITE_DATA = ${JSON.stringify(data, null, 2)};\n`;
+
+  const blob = new Blob([dataJS], { type: 'application/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.js';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('✅ data.js 已下载！发给管理员同步到GitHub', 'success');
+}
+
 // ===== EXPORT/IMPORT =====
 function exportData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });

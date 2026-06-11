@@ -223,6 +223,11 @@ tr:hover td { background:#fafbfc; }
   <!-- SETTINGS -->
   <section id="page-settings" class="page">
     <div class="page-header"><h1>⚙️ 数据备份</h1><p>导出和导入网站数据</p></div>
+    <div class="panel" style="border:2px solid var(--gold);">
+      <h3 style="margin-bottom:12px;color:var(--gold);">🚀 同步到GitHub（改完内容点这里）</h3>
+      <p style="color:var(--mgray);margin-bottom:16px;">1. 先在上面编辑好产品/公司信息<br>2. 点下面按钮下载 data.js<br>3. 告诉管理员「更新网站」</p>
+      <button class="btn btn-gold" onclick="publishToGithub()" style="font-size:16px;padding:14px 32px;">🚀 导出 data.js 准备同步</button>
+    </div>
     <div class="panel">
       <h3 style="margin-bottom:12px;">📥 导出数据</h3>
       <p style="color:var(--mgray);margin-bottom:16px;">将所有产品、公司信息、联系方式导出为JSON文件，用于备份或迁移。</p>
