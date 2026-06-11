@@ -73,7 +73,7 @@ const SITE_DATA = {
       "size": "60×13×35mm",
       "usage": "一次性通用",
       "type": "猛系A品",
-      "category": "cbd",
+      "category": "cylindrical",
       "image": "images/product_03.png",
       "stock": true
     },
