@@ -38,7 +38,7 @@ const SITE_DATA = {
       usage: 'waka / 妈宝 / 冰爆 / 小黑条 / 雾专用',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/73f0314eb5175a0d131095acdbb239de.jpg'
+      image: 'images/0e872ae3023ca051a21c7d8b337dc86c.jpg'
     },
     {
       id: 2,
@@ -51,7 +51,7 @@ const SITE_DATA = {
       usage: '调冰专用',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/b826a614ad9ca033d5f8e7f8068c22ce.jpg'
+      image: 'images/2b293882f6eea069abc4992628fcfd46.jpg'
     },
     {
       id: 3,
@@ -64,7 +64,7 @@ const SITE_DATA = {
       usage: '阿里 / 大烟专用',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/ba036c4e30aa92a16ad2d73f892d8bdd.jpg'
+      image: 'images/3bc0f7dab78f577a67fd7e030138f02c.jpg'
     },
     {
       id: 4,
@@ -77,7 +77,7 @@ const SITE_DATA = {
       usage: '鸭嘴兽专用',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/c8c269d7b6db2ed52ceae9510addb4f8.jpg'
+      image: 'images/45b369f670dd0a336106b36967bb3226.jpg'
     },
     {
       id: 5,
@@ -90,7 +90,7 @@ const SITE_DATA = {
       usage: '五代/六代通用 / 爱米乐',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/e89c31749223c18bd73f2da563c12e60.jpg'
+      image: 'images/48eb664a9528a01bee5f5caa968678d9.jpg'
     },
     {
       id: 6,
