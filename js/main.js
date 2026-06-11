@@ -5,12 +5,9 @@
 
 // Get data — always prefer SITE_DATA (GitHub synced), localStorage as fallback
 function getData() {
-  // Check if SITE_DATA has been updated (via GitHub push) more recently
-  const localVersion = localStorage.getItem('wanhong_data_version');
-  // Always use SITE_DATA as the primary source
-  // localStorage is only used as temp cache within the same session
+  // 优先读admin后台保存的修改，其次用data.js默认数据
   var saved = localStorage.getItem('wanhong_data');
-  if (saved && localVersion) {
+  if (saved) {
     try { return JSON.parse(saved); } catch(e) {}
   }
   return JSON.parse(JSON.stringify(SITE_DATA));
