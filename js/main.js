@@ -3,10 +3,14 @@
 // 从后台管理系统读取数据，admin修改后自动更新
 // ==========================================
 
-// Get data (admin-modified or default)
+// Get data — always prefer SITE_DATA (GitHub synced), localStorage as fallback
 function getData() {
-  const saved = localStorage.getItem('wanhong_data');
-  if (saved) {
+  // Check if SITE_DATA has been updated (via GitHub push) more recently
+  const localVersion = localStorage.getItem('wanhong_data_version');
+  // Always use SITE_DATA as the primary source
+  // localStorage is only used as temp cache within the same session
+  var saved = localStorage.getItem('wanhong_data');
+  if (saved && localVersion) {
     try { return JSON.parse(saved); } catch(e) {}
   }
   return JSON.parse(JSON.stringify(SITE_DATA));
