@@ -103,7 +103,7 @@ const SITE_DATA = {
       usage: '水烟大炮筒',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/product_06.png'
+      image: 'images/48eb664a9528a01bee5f5caa968678d9.jpg'
     },
     {
       id: 7,
@@ -116,7 +116,7 @@ const SITE_DATA = {
       usage: '火箭款',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/product_07.png'
+      image: 'images/7190baa9a3dfea17b3544c5556cd01f5.jpg'
     },
     {
       id: 8,
@@ -129,7 +129,7 @@ const SITE_DATA = {
       usage: '火箭款 / 通用款',
       type: '猛系A品纯钴',
       stock: true,
-      image: 'images/product_08.png'
+      image: 'images/4c31b43f278903e603ed3388c45c9b52.jpg'
     },
     {
       id: 9,
@@ -142,7 +142,7 @@ const SITE_DATA = {
       usage: 'CBD雾化器',
       type: '软包锂电',
       stock: true,
-      image: 'images/product_09.png'
+      image: 'images/5046fc9f5b6521364de7c50a123d3407.jpg'
     },
     {
       id: 10,
@@ -155,7 +155,7 @@ const SITE_DATA = {
       usage: 'CBD笔式设备',
       type: '软包锂电',
       stock: true,
-      image: 'images/product_10.png'
+      image: 'images/781f956cc1a540c21bb3ebd26562e30d.jpg'
     },
     {
       id: 11,
@@ -168,7 +168,7 @@ const SITE_DATA = {
       usage: 'CBD袖珍设备',
       type: '软包锂电',
       stock: true,
-      image: 'images/product_11.png'
+      image: 'images/8bc704b94f59a11e2f94d7292c316bde.jpg'
     },
     {
       id: 12,
@@ -181,11 +181,11 @@ const SITE_DATA = {
       usage: '大容量CBD设备',
       type: '软包锂电',
       stock: true,
-      image: 'images/product_12.png'
+      image: 'images/d47da12866daaf9869f8d27dafd9bc74.jpg'
     },
     {
       id: 13,
-      name: '定制圆柱电芯',
+      name: '定制电芯',
       category: 'custom',
       model: '定制',
       capacity: '按需定制',
@@ -194,7 +194,7 @@ const SITE_DATA = {
       usage: '各类型电子烟设备',
       type: '纯钴/混钴/高压',
       stock: true,
-      image: 'images/product_13.png'
+      image: 'images/图片1.png'
     }
   ]
 };
