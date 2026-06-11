@@ -122,6 +122,33 @@
   </div>
 </footer>
 
+<!-- WeChat Modal -->
+<div class="wechat-modal-overlay" id="wechat-modal">
+  <div class="wechat-modal">
+    <span class="wechat-close" onclick="closeWechatModal()">&times;</span>
+    <div class="wechat-modal-header">
+      <span class="wechat-icon">💬</span>
+      <h2>扫码 / 添加微信询价</h2>
+      <p>价格根据型号、数量、定制需求而定<br>加微信发需求，5分钟内回复报价</p>
+    </div>
+    <div class="wechat-qr">
+      <div class="qr-placeholder">
+        <span>📱</span>
+        <p>微信二维码</p>
+        <small>请将您的微信二维码图片替换此位置</small>
+      </div>
+    </div>
+    <div class="wechat-info">
+      <div class="wechat-id-row">
+        <span>微信号：</span>
+        <strong id="wechat-id-display">14758533587</strong>
+        <button class="btn-copy" onclick="copyWechat()">复制</button>
+      </div>
+      <div class="wechat-tip">📞 手机同号：14758533587</div>
+    </div>
+  </div>
+</div>
+
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 </body>

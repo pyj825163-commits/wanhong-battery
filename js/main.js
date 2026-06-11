@@ -126,10 +126,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Listen for admin changes (when storage updates in another tab)
+  // Listen for admin changes
   window.addEventListener('storage', function(e) {
     if (e.key === 'wanhong_data' || e.key === 'wanhong_data_version') {
       renderWebsite();
     }
   });
+
+  // WeChat modal: hijack all inquiry & contact buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-inquiry') || e.target.closest('a[href="#contact"]')) {
+      e.preventDefault();
+      const d = getData();
+      document.getElementById('wechat-id-display').textContent = d.contact.wechat || d.contact.phone2;
+      document.getElementById('wechat-modal').classList.add('show');
+    }
+  });
+  document.getElementById('wechat-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeWechatModal();
+  });
 });
+
+function closeWechatModal() { document.getElementById('wechat-modal').classList.remove('show'); }
+function copyWechat() {
+  const id = document.getElementById('wechat-id-display').textContent;
+  navigator.clipboard.writeText(id).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已复制'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+  });
+}

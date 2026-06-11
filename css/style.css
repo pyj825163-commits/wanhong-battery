@@ -164,10 +164,36 @@ footer { background:var(--ink); color:rgba(255,255,255,0.7); padding:50px 0 20px
   .custom-grid { grid-template-columns:1fr 1fr; }
   .about-stats { grid-template-columns:repeat(2, 1fr); }
 }
+/* ===== WECHAT MODAL ===== */
+.wechat-modal-overlay { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center; }
+.wechat-modal-overlay.show { display:flex; }
+.wechat-modal { background:white; border-radius:16px; padding:0; width:90%; max-width:440px; text-align:center; box-shadow:0 24px 64px rgba(0,0,0,0.25); overflow:hidden; position:relative; animation:modalIn 0.3s ease; }
+@keyframes modalIn { from { opacity:0; transform:translateY(30px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+.wechat-close { position:absolute; top:14px; right:18px; font-size:28px; cursor:pointer; color:#999; z-index:1; width:36px; height:36px; line-height:36px; text-align:center; border-radius:50%; transition:all 0.2s; }
+.wechat-close:hover { background:#f5f5f5; color:#333; }
+.wechat-modal-header { background:linear-gradient(135deg, var(--navy), var(--ink)); padding:32px 24px 24px; color:white; }
+.wechat-icon { font-size:48px; display:block; margin-bottom:12px; }
+.wechat-modal-header h2 { font-size:22px; color:var(--gold); margin-bottom:8px; }
+.wechat-modal-header p { font-size:13px; color:rgba(255,255,255,0.7); line-height:1.6; }
+.wechat-qr { padding:24px; }
+.qr-placeholder { background:var(--lgray); border:2px dashed #ddd; border-radius:12px; padding:40px; color:var(--mgray); }
+.qr-placeholder span { font-size:64px; display:block; margin-bottom:8px; }
+.qr-placeholder p { font-size:14px; font-weight:600; }
+.qr-placeholder small { font-size:11px; }
+.wechat-info { padding:0 24px 28px; }
+.wechat-id-row { display:flex; align-items:center; justify-content:center; gap:10px; background:var(--lgray); padding:14px 20px; border-radius:10px; font-size:15px; }
+.wechat-id-row span { color:var(--mgray); }
+.wechat-id-row strong { font-size:18px; color:var(--navy); letter-spacing:1px; }
+.btn-copy { padding:8px 16px; background:var(--blue); color:white; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; }
+.btn-copy:hover { background:var(--navy); }
+.btn-copy.copied { background:var(--green); }
+.wechat-tip { margin-top:12px; font-size:12px; color:var(--mgray); }
+
 @media (max-width: 768px) {
   .nav-links { display:none; }
   .hero h1 { font-size:32px; }
   .product-grid, .custom-grid, .quality-grid { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr 1fr; }
   .hero-features { flex-wrap:wrap; gap:16px; }
+  .wechat-modal { max-width:90%; }
 }
